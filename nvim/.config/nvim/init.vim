@@ -151,6 +151,13 @@ vnoremap <leader>p "_dP
 nnoremap <silent><leader>sv :source $MYVIMRC<CR>
 
 " vim-compe
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.source = {
+    \ 'path': v:true,
+    \ 'buffer': v:true,
+    \ 'nvim_lsp': v:true,
+    \ }
 lua << EOF
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)

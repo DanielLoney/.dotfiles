@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'ambv/black'
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'folke/lsp-colors.nvim'
+
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -108,7 +110,7 @@ set nowrap
 set clipboard+=unnamedplus
 set number
 set relativenumber
-set termguicolors
+"set termguicolors
 " gruvbox
 set t_Co=256
 set bg=dark

@@ -14,6 +14,10 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" gc<motion> to commonet
+" gcc to comment one line
+Plug 'tpope/vim-commentary'
+
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-compe'
 set completeopt=menuone,noselect
@@ -37,6 +41,8 @@ Plug 'tpope/vim-fugitive'
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 
+"<any number>gI to add to gitignore
+
 function! ToggleGStatus()
     if buflisted(bufname('.git/index'))
         bd .git/index
@@ -46,6 +52,7 @@ function! ToggleGStatus()
 endfunction
 command ToggleGStatus :call ToggleGStatus()
 nmap <F3> :ToggleGStatus<CR>
+
 
 Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1
@@ -58,8 +65,6 @@ nnoremap <Bslash> za
 
 "Colorschemes
 Plug 'morhetz/gruvbox'
-set t_Co=256
-set bg=dark
 
 " Elixir syntax
 Plug 'elixir-editors/vim-elixir'
@@ -104,21 +109,24 @@ set clipboard+=unnamedplus
 set number
 set relativenumber
 set termguicolors
+" gruvbox
+set t_Co=256
+set bg=dark
 
 " remap leader key
 let mapleader = " " " map leader to Space
 
+colorscheme gruvbox
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
-colorscheme gruvbox
 
 lua << EOF
 local lsp=require('lspconfig')
 lsp.pyls.setup{
     settings = {
+        -- comment out for flake8
         pyls = {
             plugins = {
-                -- comment out for flake8
                 pylint = {
                     enabled = true,
                 }

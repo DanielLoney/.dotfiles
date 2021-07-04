@@ -14,6 +14,14 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 set completeopt=menuone,noselect
 
+" Neovim Tree shitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+
+" Debugger Plugins
+Plug 'puremourning/vimspector'
+Plug 'szw/vim-maximizer'
+
 lua << EOF
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -134,7 +142,13 @@ set relativenumber
 " remap leader key
 let mapleader = " " " map leader to Space
 
+lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+
 colorscheme gruvbox
+
+vnoremap <leader>p "_dP
+
+nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 
 " Enable folding

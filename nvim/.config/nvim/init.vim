@@ -2,23 +2,65 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 
+Plug 'ambv/black'
 
-" remap leader key
-let mapleader = " " " map leader to Space
+Plug 'neovim/nvim-lspconfig'
+
+Plug 'hrsh7th/nvim-compe'
+set completeopt=menuone,noselect
+
+lua << EOF
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local check_back_space = function()
+    local col = vim.fn.col('.') - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+end
+
+-- Use (s-)tab to:
+--- move to prev/next item in completion menuone
+--- jump to prev/next snippet's placeholder
+_G.tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-n>"
+  elseif vim.fn['vsnip#available'](1) == 1 then
+    return t "<Plug>(vsnip-expand-or-jump)"
+  elseif check_back_space() then
+    return t "<Tab>"
+  else
+    return vim.fn['compe#complete']()
+  end
+end
+_G.s_tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-p>"
+  elseif vim.fn['vsnip#jumpable'](-1) == 1 then
+    return t "<Plug>(vsnip-jump-prev)"
+  else
+    -- If <S-Tab> is not working in your terminal, change it to <C-h>
+    return t "<S-Tab>"
+  end
+end
+
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+EOF
+
+Plug 'glepnir/lspsaga.nvim'
+" TODO keybindings <leader> s<initial>
+
 
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 
@@ -31,35 +73,8 @@ function! ToggleGStatus()
 endfunction
 command ToggleGStatus :call ToggleGStatus()
 nmap <F3> :ToggleGStatus<CR>
-" Git ignore: <any-number>gI (capital) and then write it to gitignore
 
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-" Show file path
-"set laststatus=2
-"set statusline+=%F
-
-" \ g-d : Go to function definitions
-" \ g-r : Go to references
-" Reminder: Ctrl-^ goes to last file you were in
-noremap <leader>gd :YcmCompleter GoToDefinition<CR>
-noremap <leader>gr :YcmCompleter GoToReferences<CR>
-
-Plugin 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1
 let g:SimpylFold_fold_docstring=0
 let b:SimpylFold_fold_docstring=0
@@ -68,29 +83,20 @@ set foldlevelstart=99
 " Enable folding with "\"
 nnoremap <Bslash> za
 
-
 "Colorschemes
-Plugin 'morhetz/gruvbox'
-colorscheme gruvbox
+Plug 'morhetz/gruvbox'
 set t_Co=256
 set bg=dark
 
-"Relative line numbers with current line shown
-set number
-set relativenumber
-
-"ale
-Plugin 'dense-analysis/ale'
-
 " Elixir syntax
-Plugin 'elixir-editors/vim-elixir'
+Plug 'elixir-editors/vim-elixir'
 " dirty hack
 au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
 au BufRead,BufNewFile *.eex set filetype=eelixir
 
 " FZF
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 " Ctrl-p for fzf GFiles
 noremap <C-p> :GFiles<CR>
@@ -98,8 +104,7 @@ noremap <C-p> :GFiles<CR>
 noremap <C-a> :Ag<CR>
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -122,10 +127,15 @@ set so=8
 set incsearch
 set colorcolumn=80
 set nowrap
+set clipboard+=unnamedplus
+set number
+set relativenumber
 
-" Copy
-nnoremap <c-c> "+y
-" Paste is just control shift v
+" remap leader key
+let mapleader = " " " map leader to Space
+
+colorscheme gruvbox
+
 
 " Enable folding
 "set foldmethod=indent
@@ -149,11 +159,6 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 " Python Encoding
 au BufRead,BufNewFile *.py,*.pyw
     \ set encoding=utf-8
-
-"powerline
-set  rtp+=/home/daniel/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-set laststatus=2
-set t_Co=256
 
 augroup highlight_yank
     autocmd!

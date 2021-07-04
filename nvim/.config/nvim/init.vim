@@ -17,8 +17,10 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'preservim/nerdtree'
 nnoremap <silent><c-t> :NERDTreeToggle<CR>
+nnoremap <silent><c-n> :NERDTreeFocus<CR>
 
 nnoremap <leader>nf :NERDTreeFind<CR>
+let NERDTreeShowHidden=1
 
 
 " gc<motion> to commonet
@@ -120,6 +122,7 @@ set nowrap
 set clipboard+=unnamedplus
 set number
 set relativenumber
+set noswapfile
 "set termguicolors
 " gruvbox
 set t_Co=256
@@ -229,12 +232,3 @@ augroup THE_PRIMEAGEN
     autocmd BufWritePre * %s/\s\+$//e
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
-
-py3 << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF

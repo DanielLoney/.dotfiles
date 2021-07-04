@@ -15,12 +15,18 @@ Plug 'folke/lsp-colors.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'preservim/nerdtree'
+nnoremap <c-n> :NERDTreeFocus<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+
 " gc<motion> to commonet
 " gcc to comment one line
 Plug 'tpope/vim-commentary'
 
-Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/vim-vsnip'
 set completeopt=menuone,noselect
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -186,10 +192,6 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 EOF
 
-" Enable folding
-"set foldmethod=indent
-"set foldlevel=99
-
 " Python Indentations
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
@@ -228,5 +230,3 @@ if 'VIRTUAL_ENV' in os.environ:
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   execfile(activate_this, dict(__file__=activate_this))
 EOF
-
-

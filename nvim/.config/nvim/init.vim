@@ -16,9 +16,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'preservim/nerdtree'
-nnoremap <c-n> :NERDTreeFocus<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <silent><c-t> :NERDTreeToggle<CR>
+
+nnoremap <leader>nf :NERDTreeFind<CR>
 
 
 " gc<motion> to commonet
@@ -46,6 +46,7 @@ nnoremap <silent><leader>ss :Lspsaga signature_help<CR>
 nnoremap <silent><leader>sn :Lspsaga rename<CR>
 nnoremap <silent><leader>sp :Lspsaga preview_definition<CR>
 nnoremap <silent><leader>sh :Lspsaga hover_doc<CR>
+nnoremap <silent><leader>sd :Lspsaga show_line_diagnostics<CR>
 
 " plugin on GitHub repo
 Plug 'tpope/vim-fugitive'
@@ -62,7 +63,7 @@ function! ToggleGStatus()
     endif
 endfunction
 command ToggleGStatus :call ToggleGStatus()
-nmap <F3> :ToggleGStatus<CR>
+nmap <silent><F3> :ToggleGStatus<CR>
 
 
 Plug 'tmhedberg/SimpylFold'

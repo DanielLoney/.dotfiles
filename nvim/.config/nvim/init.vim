@@ -1,6 +1,6 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
+let mapleader = " " " map leader to Space
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
@@ -11,7 +11,6 @@ Plug 'ambv/black'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'folke/lsp-colors.nvim'
-
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -24,10 +23,10 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-compe'
 set completeopt=menuone,noselect
 
-" Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Plug 'nvim-treesitter/playground'
 
+"TODO look at this
 " Debugger Plugins
 Plug 'puremourning/vimspector'
 " TODO check maximizer F3 binding
@@ -35,8 +34,12 @@ Plug 'puremourning/vimspector'
 
 
 Plug 'glepnir/lspsaga.nvim'
-" TODO keybindings <leader> s<initial>
-
+" 'o' in finder to goto
+nnoremap <silent><leader>sr :Lspsaga lsp_finder<CR>
+nnoremap <silent><leader>ss :Lspsaga signature_help<CR>
+nnoremap <silent><leader>sn :Lspsaga rename<CR>
+nnoremap <silent><leader>sp :Lspsaga preview_definition<CR>
+nnoremap <silent><leader>sh :Lspsaga hover_doc<CR>
 
 " plugin on GitHub repo
 Plug 'tpope/vim-fugitive'
@@ -116,7 +119,6 @@ set t_Co=256
 set bg=dark
 
 " remap leader key
-let mapleader = " " " map leader to Space
 
 colorscheme gruvbox
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
@@ -140,7 +142,7 @@ EOF
 
 vnoremap <leader>p "_dP
 
-nnoremap <Leader>sv :source $MYVIMRC<CR>
+nnoremap <silent><leader>sv :source $MYVIMRC<CR>
 
 " vim-compe
 lua << EOF

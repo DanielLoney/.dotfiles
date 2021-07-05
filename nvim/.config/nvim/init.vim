@@ -40,6 +40,7 @@ Plug 'puremourning/vimspector'
 " TODO check maximizer F3 binding
 "Plug 'szw/vim-maximizer'
 
+" Plug 'apalmer1377/factorus'
 
 Plug 'glepnir/lspsaga.nvim'
 " 'o' in finder to goto
@@ -143,7 +144,7 @@ set expandtab
 set autoindent
 set ignorecase
 set smartcase
-set list
+set list listchars=tab:>\ ,trail:-,eol:$
 set so=8
 set incsearch
 set colorcolumn=80
@@ -179,7 +180,7 @@ settings = {
 }
 EOF
 
-nnoremap <silent><leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " vim-compe
 let g:compe = {}

@@ -55,7 +55,9 @@ Plug 'tpope/vim-fugitive'
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 
-"<any number>gI to add to gitignore
+" gI to add to gitignore
+" = to see inline difference
+" <any number>gI to add to gitignore
 
 function! ToggleGStatus()
     if buflisted(bufname('.git/index'))

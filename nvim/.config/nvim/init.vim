@@ -14,7 +14,6 @@ Plug 'folke/lsp-colors.nvim'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
 Plug 'preservim/nerdtree'
 nnoremap <silent><c-t> :NERDTreeToggle<CR>
 nnoremap <silent><c-n> :NERDTreeFocus<CR>
@@ -164,77 +163,75 @@ colorscheme gruvbox
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 
+" lua << EOF
+" local lsp=require('lspconfig')
+" lsp.pyls.setup{
+"     settings = {
+"         -- comment out for flake8
+"         pyls = {
+"             plugins = {
+"                 pylint = {
+"                     enabled = true,
+"                 }
+"             }
+"         },
+"     }
+" }
+" EOF
+
 lua << EOF
 local lsp=require('lspconfig')
-lsp.pyls.setup{
-    settings = {
-        -- comment out for flake8
-        pyls = {
-            plugins = {
-                pylint = {
-                    enabled = true,
-                }
-            }
+
+lsp.jedi_language_server.setup{}
+
+lsp.diagnosticls.setup {
+  filetypes = { "python" },
+  init_options = {
+    filetypes = {
+      python = {"pylint"},
+    },
+    linters = {
+      pylint = {
+        sourceName = 'pylint',
+        command = 'pylint',
+        args = {
+          '--output-format',
+          'text',
+          '--score',
+          'no',
+          '--msg-template',
+          [['{line}:{column}:{category}:{msg} ({msg_id}:{symbol})']],
+          '%file',
         },
-    }
+        offsetColumn = 1,
+        formatLines = 1,
+        formatPattern = {
+          [[^(\d+?):(\d+?):([a-z]+?):(.*)$]],
+          {
+            line = 1,
+            column = 2,
+            security = 3,
+            message = 4
+          }
+        },
+        securities = {
+          informational = 'hint',
+          refactor = 'hint',
+          convention = 'info',
+          warning = 'warning',
+          error = 'error',
+          fatal = 'error'
+        },
+        rootPatterns = {
+          '.git',
+          'pyproject.toml',
+          'setup.py',
+        },
+      }
+    },
+  }
 }
 EOF
-
-"lua << EOF
-"local lsp=require('lspconfig')
-
-"lsp.jedi_language_server.setup{}
-
-"lsp.diagnosticls.setup {
-"  filetypes = { "python" },
-"  init_options = {
-"    filetypes = {
-"      python = {"pylint"},
-"    },
-"    linters = {
-"      pylint = {
-"        debounce = 100,
-"        sourceName = "pylint",
-"        command = "pylint",
-"        args = {
-"          "--output-format",
-"          "text",
-"          "--score",
-"          "no",
-"          "--msg-template",
-"          "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
-"          "%file",
-"        },
-"        formatPattern = {
-"          "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
-"          {
-"              line = 1,
-"              column = 2,
-"              secuirty = 3,
-"              message = 4
-"          }
-"        },
-"        rootPatterns ={
-"            ".vim",
-"            ".git",
-"            "pyproject.toml",
-"            "setup.py"
-"        },
-"        securities = {
-"          I = "hint",
-"          R = "info",
-"          C = "info",
-"          W = "warning",
-"          E = "error",
-"          F = "error"
-"        },
-"        offset = 1,
-"        formatLines = 1
-"      },
-"    },
-"  }
-"}
-"EOF
 
 nnoremap <leader>sv :source $MYVIMRC<CR>
 

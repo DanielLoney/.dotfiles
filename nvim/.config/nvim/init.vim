@@ -33,30 +33,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'puremourning/vimspector'
 " TODO check maximizer F3 binding
 "Plug 'szw/vim-maximizer'
-
-" Plug 'apalmer1377/factorus'
-
 Plug 'glepnir/lspsaga.nvim'
-
-" plugin on GitHub repo
 Plug 'tpope/vim-fugitive'
-nmap <leader>gj :diffget //3<CR>
-nmap <leader>gf :diffget //2<CR>
-
-" gI to add to gitignore
-" = to see inline difference
-" <any number>gI to add to gitignore
-
-function! ToggleGStatus()
-    if buflisted(bufname('.git/index'))
-        bd .git/index
-    else
-        Git
-    endif
-endfunction
-command ToggleGStatus :call ToggleGStatus()
-nmap <silent><F3> :ToggleGStatus<CR>
-
 
 Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1

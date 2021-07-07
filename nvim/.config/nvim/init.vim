@@ -15,11 +15,6 @@ Plug 'folke/lsp-colors.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
-nnoremap <silent><c-t> :NERDTreeToggle<CR>
-nnoremap <silent><c-n> :NERDTreeFocus<CR>
-
-nnoremap <leader>nf :NERDTreeFind<CR>
-let NERDTreeShowHidden=1
 
 
 " gc<motion> to commonet
@@ -42,13 +37,6 @@ Plug 'puremourning/vimspector'
 " Plug 'apalmer1377/factorus'
 
 Plug 'glepnir/lspsaga.nvim'
-" 'o' in finder to goto
-nnoremap <silent><leader>sr :Lspsaga lsp_finder<CR>
-nnoremap <silent><leader>ss :Lspsaga signature_help<CR>
-nnoremap <silent><leader>sn :Lspsaga rename<CR>
-nnoremap <silent><leader>sp :Lspsaga preview_definition<CR>
-nnoremap <silent><leader>sh :Lspsaga hover_doc<CR>
-nnoremap <silent><leader>sd :Lspsaga show_line_diagnostics<CR>
 
 " plugin on GitHub repo
 Plug 'tpope/vim-fugitive'
@@ -91,34 +79,6 @@ au BufRead,BufNewFile *.eex set filetype=eelixir
 " FZF
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-
-" Ctrl-p for fzf GFiles
-noremap <C-p> :GFiles<CR>
-
-function! s:line_handler(l)
-  let keys = split(a:l, ':\t')
-  exec 'buf' keys[0]
-  exec keys[1]
-  normal! ^zz
-endfunction
-
-function! s:buffer_lines()
-  let res = []
-  for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-    call extend(res, map(getbufline(b,0,"$"), 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
-  endfor
-  return res
-endfunction
-
-command! FZFLines call fzf#run({
-\   'source':  <sid>buffer_lines(),
-\   'sink':    function('<sid>line_handler'),
-\   'options': '--extended --nth=3..',
-\   'down':    '60%'
-\})
-
-" Ctrl-f for fzf by string
-nnoremap <c-f> :FZFLines<CR>
 
 " All of your Plugins must be added before the following line
 call plug#end()

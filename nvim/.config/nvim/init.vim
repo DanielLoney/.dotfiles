@@ -100,69 +100,7 @@ set bg=dark
 colorscheme gruvbox
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
-lua << EOF
-local lsp=require('lspconfig')
-
--- lsp.jedi_language_server.setup{}
-
-require("lspconfig").pyright.setup {
-  settings = {
-    python = {
-      analysis = {
-        typeCheckingMode = "off",
-      },
-    },
-  },
-}
-
-lsp.diagnosticls.setup {
-  filetypes = { "python" },
-  init_options = {
-    filetypes = {
-      python = {"pylint"},
-    },
-    linters = {
-      pylint = {
-        sourceName = 'pylint',
-        command = 'pylint',
-        args = {
-          '--output-format',
-          'text',
-          '--score',
-          'no',
-          '--msg-template',
-          [['{line}:{column}:{category}:{msg} ({msg_id}:{symbol})']],
-          '%file',
-        },
-        offsetColumn = 1,
-        formatLines = 1,
-        formatPattern = {
-          [[^(\d+?):(\d+?):([a-z]+?):(.*)$]],
-          {
-            line = 1,
-            column = 2,
-            security = 3,
-            message = 4
-          }
-        },
-        securities = {
-          informational = 'hint',
-          refactor = 'hint',
-          convention = 'info',
-          warning = 'warning',
-          error = 'error',
-          fatal = 'error'
-        },
-        rootPatterns = {
-          '.git',
-          'pyproject.toml',
-          'setup.py',
-        },
-      }
-    },
-  }
-}
-EOF
+lua require("danielloney")
 
 nnoremap <leader>sv :source $MYVIMRC<CR>
 

@@ -90,7 +90,7 @@ set clipboard=unnamedplus
 set number
 set relativenumber
 set noswapfile
-"set termguicolors
+"
 " gruvbox
 set t_Co=256
 set bg=dark

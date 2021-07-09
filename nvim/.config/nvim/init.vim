@@ -72,32 +72,7 @@ call plug#end()
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-set exrc
-set guicursor=a:blinkon100
-set nu
-set tabstop=2
-set shiftwidth=4
-set expandtab
-set autoindent
-set ignorecase
-set smartcase
-set list listchars=tab:>\ ,trail:-,eol:$
-set so=8
-set incsearch
-set colorcolumn=80
-set nowrap
-set clipboard=unnamedplus
-set number
-set relativenumber
-set noswapfile
 "
-" gruvbox
-set t_Co=256
-set bg=dark
-
-" remap leader key
-
-colorscheme gruvbox
 
 lua require("danielloney")
 

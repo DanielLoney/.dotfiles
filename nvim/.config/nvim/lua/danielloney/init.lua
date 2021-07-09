@@ -1,7 +1,10 @@
 local lsp=require('lspconfig')
 
+require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+
 lsp.jedi_language_server.setup{}
 
+-- pyright still bugging out arghhhhhh
 -- require("lspconfig").pyright.setup {
 --   settings = {
 --     python = {

@@ -98,7 +98,6 @@ set bg=dark
 " remap leader key
 
 colorscheme gruvbox
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 lua require("danielloney")
 

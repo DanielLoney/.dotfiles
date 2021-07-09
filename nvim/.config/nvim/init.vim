@@ -25,6 +25,7 @@ Plug 'hrsh7th/nvim-compe'
 set completeopt=menuone,noselect
 Plug 'hrsh7th/vim-vsnip'
 
+Plug 'creativenull/diagnosticls-nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Plug 'nvim-treesitter/playground'
 

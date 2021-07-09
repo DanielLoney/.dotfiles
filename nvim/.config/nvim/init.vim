@@ -22,8 +22,8 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-commentary'
 
 Plug 'hrsh7th/nvim-compe'
-Plug 'hrsh7th/vim-vsnip'
 set completeopt=menuone,noselect
+Plug 'hrsh7th/vim-vsnip'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Plug 'nvim-treesitter/playground'

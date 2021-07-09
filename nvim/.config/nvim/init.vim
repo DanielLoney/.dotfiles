@@ -54,19 +54,6 @@ Plug 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-"
 
 lua require("danielloney")
 
@@ -83,9 +70,6 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix
 
 syntax on
-"Flagging Unnecessary Whitespace
-highlight BadWhitespace ctermbg=red guibg=darkred
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " Python Encoding
 au BufRead,BufNewFile *.py,*.pyw
@@ -96,7 +80,8 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
-augroup THE_PRIMEAGEN
+" From ThePrimagen <3
+augroup no_whitespace
     autocmd!
     autocmd BufWritePre * %s/\s\+$//e
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}

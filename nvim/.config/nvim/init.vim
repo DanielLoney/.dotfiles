@@ -16,7 +16,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
 
-
 " gc<motion> to commonet
 " gcc to comment one line
 Plug 'tpope/vim-commentary'

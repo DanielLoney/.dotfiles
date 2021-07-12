@@ -23,17 +23,19 @@ Plug 'tpope/vim-commentary'
 
 Plug 'hrsh7th/nvim-compe'
 set completeopt=menuone,noselect
+
 Plug 'hrsh7th/vim-vsnip'
 
 Plug 'creativenull/diagnosticls-nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Plug 'nvim-treesitter/playground'
 
-"TODO look at this
+" TODO look at this
 " Debugger Plugins
 Plug 'puremourning/vimspector'
 " TODO check maximizer F3 binding
 "Plug 'szw/vim-maximizer'
+
 Plug 'glepnir/lspsaga.nvim'
 Plug 'tpope/vim-fugitive'
 

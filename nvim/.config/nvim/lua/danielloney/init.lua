@@ -15,7 +15,13 @@ lsp.jedi_language_server.setup{}
 --     },
 --   },
 -- }
-require 'diagnosticls-nvim'.init {}
+local function on_attach(client)
+    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+end
+
+require 'diagnosticls-nvim'.init {
+    on_attach = on_attach
+}
 
 local pylint = {
   sourceName = 'pylint',
@@ -64,8 +70,10 @@ local black = {
       '.git',
       'pyproject.toml',
       'setup.py',
-  }
+  },
 }
+
+-- local black = require 'diagnosticls-nvim.formatters.black'
 
 require 'diagnosticls-nvim'.setup {
     ['python'] = {

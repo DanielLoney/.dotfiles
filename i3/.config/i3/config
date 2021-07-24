@@ -42,7 +42,10 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 exec blueman-applet
 
 # Logitech wireless mouse
-exec xinput --set-prop 13 346 -0.5
+#exec xinput --set-prop 13 346 -0.5
+# Vertical Mouse
+xinput set-prop 15 346 -0.6
+
 exec --no-startup-id redshift-gtk
 # Key repeat
 exec xset r rate 300 25

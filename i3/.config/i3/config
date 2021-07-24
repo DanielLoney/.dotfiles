@@ -44,7 +44,7 @@ exec blueman-applet
 # Logitech wireless mouse
 #exec xinput --set-prop 13 346 -0.5
 # Vertical Mouse
-xinput set-prop 15 346 -0.6
+exec xinput set-prop 15 346 -0.6
 
 exec --no-startup-id redshift-gtk
 # Key repeat

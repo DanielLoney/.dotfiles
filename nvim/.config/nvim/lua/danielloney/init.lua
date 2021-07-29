@@ -2,10 +2,14 @@ local lsp=require('lspconfig')
 
 require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
-lsp.jedi_language_server.setup{}
+-- Python
 
+local function on_attach(client)
+    vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()]]
+end
+
+lsp.jedi_language_server.setup{on_attach = on_attach}
 -- pyright still bugging out arghhhhhh
-
 -- require("lspconfig").pyright.setup {
 --   settings = {
 --     python = {
@@ -15,9 +19,12 @@ lsp.jedi_language_server.setup{}
 --     },
 --   },
 -- }
-local function on_attach(client)
-    vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()]]
-end
+
+-- C/C++
+
+lsp.clangd.setup{on_attach = on_attach}
+
+
 
 require 'diagnosticls-nvim'.init {
     on_attach = on_attach

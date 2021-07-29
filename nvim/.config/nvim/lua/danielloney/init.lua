@@ -16,7 +16,7 @@ lsp.jedi_language_server.setup{}
 --   },
 -- }
 local function on_attach(client)
-    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+    vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()]]
 end
 
 require 'diagnosticls-nvim'.init {
@@ -24,22 +24,10 @@ require 'diagnosticls-nvim'.init {
 }
 
 
-local black = {
-  sourceName = 'black',
-  command = 'black',
-  args = { '%filepath' },
-  doesWriteToFile = true,
-  rootPatterns = {
-      '.git',
-      'pyproject.toml',
-      'setup.py',
-  },
-}
-
 local pylint = require 'diagnosticls-nvim.linters.pylint'
 pylint.securities.refactor = 'hint'
 
--- local black = require 'diagnosticls-nvim.formatters.black'
+local black = require 'diagnosticls-nvim.formatters.black'
 
 require 'diagnosticls-nvim'.setup {
     ['python'] = {

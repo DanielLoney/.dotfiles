@@ -32,6 +32,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " TODO look at this
 " Debugger Plugins
 Plug 'puremourning/vimspector'
+" let g:vimspector_enable_mappings = 'HUMAN'
+" packadd! vimspector
+
 " TODO check maximizer F3 binding
 "Plug 'szw/vim-maximizer'
 

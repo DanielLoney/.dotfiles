@@ -35,8 +35,10 @@ Plug 'puremourning/vimspector'
 " let g:vimspector_enable_mappings = 'HUMAN'
 " packadd! vimspector
 
-" TODO check maximizer F3 binding
-"Plug 'szw/vim-maximizer'
+Plug 'szw/vim-maximizer'
+let g:maximizer_set_default_mapping = 1
+nnoremap <leader>mm :MaximizerToggle!<CR>
+
 
 Plug 'glepnir/lspsaga.nvim'
 Plug 'tpope/vim-fugitive'

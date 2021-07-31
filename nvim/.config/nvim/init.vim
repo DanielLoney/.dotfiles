@@ -36,7 +36,7 @@ Plug 'puremourning/vimspector'
 " packadd! vimspector
 
 Plug 'szw/vim-maximizer'
-let g:maximizer_set_default_mapping = 1
+let g:maximizer_set_default_mapping = 0
 nnoremap <leader>mm :MaximizerToggle!<CR>
 
 

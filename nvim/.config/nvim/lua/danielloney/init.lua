@@ -6,8 +6,8 @@ local function on_attach(client)
     vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
 end
 
--- Lua
 
+-- Lua
 local system_name
 if vim.fn.has("mac") == 1 then
   system_name = "macOS"
@@ -53,8 +53,8 @@ require'lspconfig'.sumneko_lua.setup {
   },
 }
 
--- Python
 
+-- Python
 lsp.jedi_language_server.setup{}
 -- pyright still bugging out arghhhhhh
 -- require("lspconfig").pyright.setup {
@@ -67,17 +67,18 @@ lsp.jedi_language_server.setup{}
 --   },
 -- }
 
--- C/C++
 
+-- C/C++
 lsp.clangd.setup{on_attach = on_attach}
 
 
-require 'diagnosticls-nvim'.init {
+-- Diagnostics
+require 'diagnosticls-configs'.init {
     on_attach = on_attach
 }
 
 
-local pylint = require 'diagnosticls-nvim.linters.pylint'
+local pylint = require 'diagnosticls-configs.linters.pylint'
 pylint.securities.refactor = 'hint'
 
 -- local black = require 'diagnosticls-nvim.formatters.black'
@@ -92,7 +93,7 @@ local black = {
   },
 }
 
-require 'diagnosticls-nvim'.setup {
+require 'diagnosticls-configs'.setup {
     ['python'] = {
         linter = pylint,
         formatter = black,

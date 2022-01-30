@@ -13,3 +13,5 @@ nnoremap <silent><leader>sf :lua vim.lsp.buf.definition()<CR>
 " nnoremap <silent><leader>ff :lua vim.lsp.buf.definition()<CR>
 nnoremap <silent><leader>sr :lua vim.lsp.buf.references() <CR>
 nnoremap <silent><leader>sh :lua vim.lsp.buf.hover() <CR>
+nnoremap <silent><leader>sd :lua vim.diagnostic.open_float() <CR>
+

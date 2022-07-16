@@ -39,8 +39,7 @@ Plug 'szw/vim-maximizer'
 let g:maximizer_set_default_mapping = 0
 nnoremap <leader>mm :MaximizerToggle!<CR>
 
-
-Plug 'glepnir/lspsaga.nvim'
+Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'tpope/vim-fugitive'
 
 Plug 'tmhedberg/SimpylFold'

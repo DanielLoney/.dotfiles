@@ -71,8 +71,8 @@ lsp.jedi_language_server.setup{}
 -- C/C++
 lsp.clangd.setup{on_attach = on_attach}
 
--- C/C++
-lsp.rust_analyzer.setup({})
+-- Rust
+lsp.rust_analyzer.setup{on_attach = on_attach}
 
 -- Diagnostics
 require 'diagnosticls-configs'.init {

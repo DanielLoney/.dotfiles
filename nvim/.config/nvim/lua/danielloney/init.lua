@@ -72,7 +72,20 @@ lsp.jedi_language_server.setup{}
 lsp.clangd.setup{on_attach = on_attach}
 
 -- Rust
-lsp.rust_analyzer.setup{on_attach = on_attach}
+lsp.rust_analyzer.setup{
+    on_attach = on_attach,
+    settings = {
+        ['rust-analyzer'] = {
+            checkOnSave = {
+                allFeatures = true,
+                overrideCommand = {
+                    'cargo', 'clippy', '--workspace', '--message-format=json',
+                    '--all-targets', '--all-features'
+                }
+            }
+        }
+    }
+}
 
 -- Diagnostics
 require 'diagnosticls-configs'.init {
@@ -83,17 +96,7 @@ require 'diagnosticls-configs'.init {
 local pylint = require 'diagnosticls-configs.linters.pylint'
 pylint.securities.refactor = 'hint'
 
--- local black = require 'diagnosticls-nvim.formatters.black'
-local black = {
-  sourceName = 'black',
-  command = 'black',
-  args = { '-' },
-  rootPatterns = {
-    '.git',
-    'pyproject.toml',
-    'setup.py',
-  },
-}
+local black = require 'diagnosticls-configs.formatters.black'
 
 require 'diagnosticls-configs'.setup {
     ['python'] = {

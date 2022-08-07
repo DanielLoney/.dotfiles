@@ -676,8 +676,6 @@ set_from_resource $i3-wm.program.3 i3-wm.program.3 :
 exec --no-startup-id $i3-wm.program.3
 
 # My customizations
-
-exec feh --bg-center ~/Pictures/Backgrounds/1455303.jpg
 # Key repeat
 exec xset r rate 300 25
 # Startup workspaces/processes

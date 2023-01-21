@@ -1,16 +1,11 @@
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 
-" gI to add to gitignore
-" = to see inline difference
-" <any number>gI to add to gitignore
-
-function! ToggleGStatus()
-    if buflisted(bufname('.git/index'))
-        bd .git/index
-    else
-        Git
-    endif
+function FugitiveToggle() abort
+  try
+    exe filter(getwininfo(), "get(v:val['variables'], 'fugitive_status', v:false) != v:false")[0].winnr .. "wincmd c"
+  catch /E684/
+    Git
+  endtry
 endfunction
-command ToggleGStatus :call ToggleGStatus()
-nmap <silent><F3> :ToggleGStatus<CR>
+nmap <silent><F3> <cmd>call FugitiveToggle()<CR>

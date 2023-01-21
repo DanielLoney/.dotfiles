@@ -27,6 +27,7 @@ Plug 'hrsh7th/vim-vsnip'
 
 Plug 'creativenull/diagnosticls-configs-nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 "Plug 'nvim-treesitter/playground'
 
 " TODO look at this

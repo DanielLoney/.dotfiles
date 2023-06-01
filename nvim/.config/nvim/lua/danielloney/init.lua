@@ -87,6 +87,23 @@ lsp.rust_analyzer.setup{
     }
 }
 
+-- Go
+local util = require "lspconfig/util"
+
+lsp.gopls.setup {
+    cmd = {"gopls", "serve"},
+    filetypes = {"go", "gomod"},
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+}
+
 -- Diagnostics
 require 'diagnosticls-configs'.init {
     on_attach = on_attach

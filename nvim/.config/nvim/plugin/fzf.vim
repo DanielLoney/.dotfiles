@@ -1,5 +1,7 @@
-" Ctrl-p for fzf GFiles
-noremap <C-p> :GFiles<CR>
+" Ctrl-p for fzf Files
+noremap <C-p> :Files<CR>
+" Ctrl-b-p for fzf Buffers
+noremap <C-b><C-P> :Buffers<CR>
 
 function! s:line_handler(l)
   let keys = split(a:l, ':\t')
@@ -25,4 +27,3 @@ command! FZFLines call fzf#run({
 
 " Ctrl-f for fzf by string
 nnoremap <c-f> :FZFLines<CR>
-

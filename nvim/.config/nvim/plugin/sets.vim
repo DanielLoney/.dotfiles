@@ -16,3 +16,5 @@ set clipboard=unnamedplus
 set number
 set relativenumber
 set noswapfile
+set shell=/usr/bin/zsh
+set clipboard+=unnamedplus

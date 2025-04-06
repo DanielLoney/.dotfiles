@@ -1,4 +1,4 @@
-" Ctrl-p for fzf Files
+let $FZF_DEFAULT_COMMAND = 'rg --hidden --ignore .git -l -g ""'
 noremap <C-p> :Files<CR>
 " Ctrl-b-p for fzf Buffers
 noremap <C-b><C-P> :Buffers<CR>

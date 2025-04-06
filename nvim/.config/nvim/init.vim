@@ -16,6 +16,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
 
+Plug 'williamboman/mason.nvim'
+
 " gc<motion> to commonet
 " gcc to comment one line
 Plug 'tpope/vim-commentary'
@@ -32,7 +34,7 @@ Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " TODO look at this
 " Debugger Plugins
-Plug 'puremourning/vimspector'
+" Plug 'puremourning/vimspector'
 " let g:vimspector_enable_mappings = 'HUMAN'
 " packadd! vimspector
 

@@ -677,8 +677,8 @@ exec --no-startup-id $i3-wm.program.3
 
 # My customizations
 # Key repeat
-exec xset r rate 300 25
+exec xset r rate 200 25
 # Startup workspaces/processes
-exec --no-startup-id i3-msg 'workspace 2; exec terminator'
-exec --no-startup-id i3-msg 'workspace 1; exec google-chrome --password-store=gnome'
+# exec --no-startup-id i3-msg 'workspace 2; exec terminator'
+# exec --no-startup-id i3-msg 'workspace 1; exec google-chrome --password-store=gnome'
 floating_modifier $mod

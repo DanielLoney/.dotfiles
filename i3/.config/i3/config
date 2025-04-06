@@ -24,44 +24,60 @@ font pango:monospace 10
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 
 # My Customizations
-#
-bindsym Print exec --no-startup-id gnome-screenshot -i
 
-exec feh --bg-center ~/Pictures/Backgrounds/1455303.jpg
+
+#
 
 # Passwords
-exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+# exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 
-exec blueman-applet
+# exec blueman-applet
 
-exec --no-startup-id redshift-gtk
+# exec --no-startup-id redshift-gtk
 # Key repeat
-exec xset r rate 300 25
+exec xset r rate 200 25
 
-# Startup workspaces/processes
-exec --no-startup-id i3-msg 'workspace 2; exec terminator'
-exec --no-startup-id i3-msg 'workspace 1; exec google-chrome --password-store=gnome'
 floating_modifier $mod
 
-# No boarders
+# No borders
 for_window [class="^.*"] border pixel 0
                           # class                 border  backgr. text    indicator child_border
 for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
-# End of Customizations
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Plasma compatibility improvements
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+for_window [class="yakuake"] floating enable
+for_window [class="systemsettings"] floating enable
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] border none, move position 70 ppt 81 ppt
+no_focus [class="plasmashell" window_type="notification"]
+
+for_window [title="Desktop @ QRect.*"] kill; floating enable; border none
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "increase_volume"
+bindsym XF86AudioLowerVolume exec --no-startup-id qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "decrease_volume"
+bindsym XF86AudioMute exec --no-startup-id qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "mute"
+bindsym XF86AudioMicMute exec --no-startup-id qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "mic_mute"
+
+# End of Customizations
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -121,7 +137,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -171,7 +187,9 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# UNCOMMENT IF NOT USING PLASMA DANIEL bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# using plasma's logout screen instead of i3's
+bindsym $mod+Shift+e exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -200,8 +218,33 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# wallpaper
+exec_always --no-startup-id feh --bg-fill /usr/share/wallpapers/North/contents/images/5120x2880.png
+
+# Startup workspaces/processes
+# exec --no-startup-id i3-msg 'workspace $ws1; exec google-chrome-stable; workspace $ws2; exec konsole'
+# exec --no-startup-id i3-msg 'workspace $ws1; exec google-chrome-stable; workspace $ws2; exec konsole'
+exec --no-startup-id sh -c 'sleep 0.2; i3-msg workspace 1'
+exec --no-startup-id sh -c 'sleep 0.2; i3-msg exec google-chrome-stable'
+# exec --no-startup-id sh -c 'sleep 0.2; i3-msg workspace 2'
+# exec --no-startup-id sh -c 'sleep 0.2; i3-msg exec konsole'
+# exec --no-startup-id sh -c 'sleep 0.2; i3-msg workspace 1'
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    status_command i3status
+    mode hide
+    height 30
+    colors {
+      background #242424
+    }
 }
+
+# My customizations
+# Key repeat
+# Startup workspaces/processes
+# exec --no-startup-id i3-msg 'workspace 2; exec terminator'
+# exec --no-startup-id i3-msg 'workspace 1; exec google-chrome --password-store=gnome'
+floating_modifier $mod
+exec_always "exec xset r rate 200 25"

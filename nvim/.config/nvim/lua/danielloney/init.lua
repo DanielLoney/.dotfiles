@@ -1,4 +1,5 @@
 require("mason").setup()
+require("danielloney.cmp")
 
 local lsp=require('lspconfig')
 

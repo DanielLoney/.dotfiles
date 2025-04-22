@@ -13,5 +13,8 @@ if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   source /usr/share/zsh/manjaro-zsh-prompt
 fi
 
+# fzf
+source <(fzf --zsh)
+
 alias "f"='cd $(find ~/.dotfiles -type d | fzf) '
 alias "n"='nvim'
